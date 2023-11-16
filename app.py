@@ -2,10 +2,10 @@
 import os
 import aws_cdk as cdk
 
-from energy_blog_cdk.network_cdk_stack import NetworkCdkStack
-from energy_blog_cdk.directory_cdk_stack import DirectoryCdkStack
-from energy_blog_cdk.storage_cdk_stack import StorageCdkStack
-from energy_blog_cdk.instance_cdk_stack import InstanceCdkStack
+from local_zone_cdk.network_cdk_stack import NetworkCdkStack
+from local_zone_cdk.directory_cdk_stack import DirectoryCdkStack
+from local_zone_cdk.storage_cdk_stack import StorageCdkStack
+from local_zone_cdk.instance_cdk_stack import InstanceCdkStack
 
 # Setup the environment configuration
 deployment_account_id = cdk.Aws.ACCOUNT_ID
