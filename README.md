@@ -14,37 +14,11 @@ This pattern will accelerate the deployment of a test environment to perform lat
 
 ## Prerequisite Steps
 
-1. Opt into the AWS perth local zone - [Instructions here](https://docs.aws.amazon.com/local-zones/latest/ug/getting-started.html#getting-started-find-local-zone) - You DO NOT need to create the subnet (per the instructions.) The CDK application will do this for you. 
-    ```
-    aws ec2 modify-availability-zone-group \
-    --region ap-southeast-2 \
-    --group-name ap-southeast-2-per-1a \
-    --opt-in-status opted-in
-    ```
-2. Create your key pair for your EC2 Instances
-    ```
-    aws ec2 create-key-pair --key-name aws-energy-blog-keypair --region ap-southeast-2 --query 'KeyMaterial' --output text > keys.pem
-    ```
-3. Update the ```keys``` variable with the key pair name in ```app.py``` on line 25.
-    ```
-    keys = "aws-energy-blog-keypair"
-    ```
-4. Identify your source ip which will be used to access the environment 
-    ```
-    curl ipinfo.io
-    ```
-5. Update the ```source_ips``` variable in ```app.py``` on line 28 with the IP addresses you will use to access the environment. These are used to buld rules in the security group. 
-    ```
-    source_ips = ["192.168.0.1/32", "192.168.0.2/32"]
-    ```
-
-## Deployment Instructions
-
-1. Create a new directory, navigate to that directory in a terminal and clone the GitHub repository:
+1. Clone the GitHub repository into a new directory:
     ```
     git clone https://github.com/aws-samples/seismic-interpretation-local-zone.git
     ```
-2. Change directory to the pattern directory:
+2. Change directory to the solution directory:
     ```
     cd seismic-interpretation-local-zone
     ```
@@ -64,6 +38,32 @@ This pattern will accelerate the deployment of a test environment to perform lat
     ```
     pip3 install -r requirements.txt
     ```
+
+## Deployment Instructions
+
+1. Opt into the AWS perth local zone - [Instructions here](https://docs.aws.amazon.com/local-zones/latest/ug/getting-started.html#getting-started-find-local-zone) - You **DO NOT** need to create the subnet (per the instructions.) The CDK application will do this for you. 
+    ```
+    aws ec2 modify-availability-zone-group \
+    --region ap-southeast-2 \
+    --group-name ap-southeast-2-per-1a \
+    --opt-in-status opted-in
+    ```
+2. Create your key pair for your EC2 Instances
+    ```
+    aws ec2 create-key-pair --key-name aws-energy-blog-keypair --region ap-southeast-2 --query 'KeyMaterial' --output text > keys.pem
+    ```
+3. Update the ```keys``` variable with the key pair name in ```app.py``` on line 23.
+    ```
+    keys = "aws-energy-blog-keypair"
+    ```
+4. Identify your source ip which will be used to access the environment 
+    ```
+    curl ipinfo.io
+    ```
+5. Update the ```source_ips``` variable in ```app.py``` on line 26 with the IP addresses you will use to access the environment. These are used to buld rules in the security group. 
+    ```
+    source_ips = ["192.168.0.1/32", "192.168.0.2/32"]
+    ```
 6. From the command line, use AWS CDK to deploy the AWS resources for the serverless application as specified in the app.py file:
     ```
     cdk deploy --all
@@ -74,7 +74,7 @@ This pattern will accelerate the deployment of a test environment to perform lat
 10. Add the user to the [required groups](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html) to manage domain permissions. We **strongly recommend** creating your own service account to manage the directory, and generic user accounts required to test the deployed solution. 
 11. Once you have confirmed you can manage the directory, [reset the password](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_manage_users_groups_reset_password.html) for the [Admin account](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_admin_account.html) using a long password (at most 64 random characters) and then disable the account
 12. [Delete the AWS Secrets Manager secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html) that is configured at build time. This is prefixed with ```managedadsecret```
-13. You are now ready to commence testing. 
+13. You are now ready to commence testing. You can follow instructions in the article, here - [Ultralow latency seismic interpretation on AWS Local Zones](https://aws.amazon.com/blogs/industries/ultralow-latency-seismic-interpretation-on-aws-local-zones/)
 
 ## Useful commands
 
