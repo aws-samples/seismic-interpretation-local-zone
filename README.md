@@ -1,7 +1,7 @@
 
 # AWS Perth Local Zone Latency Test Environment
 
-This pattern will accelerate the deployment of a test environment to perform latency tests to the perth local zone from your own network. You can review the blog article that discusses this in depth  - here [blog url goes here](http://example.com)
+This pattern will accelerate the deployment of a test environment to perform latency tests to the perth local zone from your own network. You can review the blog article that discusses this in depth here - [Ultralow latency seismic interpretation on AWS Local Zones](https://aws.amazon.com/blogs/industries/ultralow-latency-seismic-interpretation-on-aws-local-zones/)
 
 ## Requirements
 
